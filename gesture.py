@@ -40,6 +40,9 @@ while(True):
     elif(len(bluecnts)== 2):
         cv2.putText(frame, '2', (0, 50), font, 2, (0, 255, 0), 3, trial)
 
+    elif(len(bluecnts)== 3):
+        cv2.putText(frame, '3', (0, 50), font, 2, (0, 255, 0), 3, trial)
+
     # displaying the frame captured
     cv2.imshow('frame', frame)
     # cv2.imshow('gray', gray)
