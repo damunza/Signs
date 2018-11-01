@@ -26,22 +26,27 @@ while(True):
     blueopen=cv2.morphologyEx(blue, cv2.MORPH_OPEN, Open)
     blueclose=cv2.morphologyEx(blueopen, cv2.MORPH_CLOSE, Close)
 
-    #number of
+    #number of blues available
     _, bluecnts, h = cv2.findContours(blueclose.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)# if you get too many values to unpack just add _, at the begining
 
     font=cv2.FONT_HERSHEY_SIMPLEX
     trial=cv2.LINE_AA
-    if (len(bluecnts)==0):
-        cv2.putText(frame, 'It Fing Works', (0,50), font, 2, (0,255,0), 3, trial)
+    if (len(bluecnts)==3):
+        #the rectangles for the positions of the blues
+        x1, y1, w1, h1 =cv2.boundingRect(bluecnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(bluecnts[1])
+        x3, y3, w3, h3 = cv2.boundingRect(bluecnts[2])
+        # x1, y1, w1, h1 = cv2.boundingReact(bluecnts[0])
 
-    elif (len(bluecnts)==1):
+        #creating the rectangles to mark the limits
+        cv2.circle(frame, (x1,y1), 20, (0,0,255), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 0, 255), 1)
+        cv2.circle(frame, (x3, y3), 20, (0, 0, 255), 1)
+        cv2.putText(frame, 'F', (0,50), font, 2, (0,255,0), 3, trial)
+
+    elif (len(bluecnts)==4):
         cv2.putText(frame, '1', (0, 50), font, 2, (0, 255, 0), 3, trial)
 
-    elif(len(bluecnts)== 2):
-        cv2.putText(frame, '2', (0, 50), font, 2, (0, 255, 0), 3, trial)
-
-    elif(len(bluecnts)== 3):
-        cv2.putText(frame, '3', (0, 50), font, 2, (0, 255, 0), 3, trial)
 
     # displaying the frame captured
     cv2.imshow('frame', frame)
