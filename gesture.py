@@ -75,7 +75,15 @@ while(True):
         #output for the situation
         cv2.putText(frame, 'B', (0, 50), font, 2, (0, 255, 0), 3, trial)
 
-    elif (len(greencnts)==1):
+    elif (len(greencnts)==1 & len(bluecnts)==1):
+        x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(bluecnts[0])
+
+        #making circles
+        cv2.circle(frame, (x1, y1), 20, (0, 0, 255), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
+
+        #result
         cv2.putText(frame, 'green', (0, 50), font, 2, (0, 0, 255), 3, trial)
 
 
