@@ -36,16 +36,29 @@ while(True):
         x1, y1, w1, h1 =cv2.boundingRect(bluecnts[0])
         x2, y2, w2, h2 = cv2.boundingRect(bluecnts[1])
         x3, y3, w3, h3 = cv2.boundingRect(bluecnts[2])
-        # x1, y1, w1, h1 = cv2.boundingReact(bluecnts[0])
 
-        #creating the rectangles to mark the limits
+        #creating the circles to mark the limits
         cv2.circle(frame, (x1,y1), 20, (0,0,255), 1)
         cv2.circle(frame, (x2, y2), 20, (0, 0, 255), 1)
         cv2.circle(frame, (x3, y3), 20, (0, 0, 255), 1)
+
+        #output for the situation
         cv2.putText(frame, 'F', (0,50), font, 2, (0,255,0), 3, trial)
 
     elif (len(bluecnts)==4):
-        cv2.putText(frame, '1', (0, 50), font, 2, (0, 255, 0), 3, trial)
+        x1, y1, w1, h1 = cv2.boundingRect(bluecnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(bluecnts[1])
+        x3, y3, w3, h3 = cv2.boundingRect(bluecnts[2])
+        x4, y4, w4, h4 = cv2.boundingRect(bluecnts[3])
+
+        # creating the circles to mark the limits
+        cv2.circle(frame, (x1, y1), 20, (0, 0, 255), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 0, 255), 1)
+        cv2.circle(frame, (x3, y3), 20, (0, 0, 255), 1)
+        cv2.circle(frame, (x4, y4), 20, (0, 0, 255), 1)
+
+        #output for the situation
+        cv2.putText(frame, 'B', (0, 50), font, 2, (0, 255, 0), 3, trial)
 
 
     # displaying the frame captured
