@@ -24,11 +24,18 @@ while(True):
     lower_green = np.array([33,80,40])
     upper_green = np.array([100,255,255])
 
+    #red
+    lower_red = np.array([45,50,110])
+    upper_red = np.array([90,255,255])
+
     #getting only blue images
     blue = cv2.inRange(hsv, lower_blue, upper_blue)
 
     #getting green object
     green = cv2.inRange(hsv, lower_green, upper_green)
+
+    #getting red object
+    red = cv2.inRange(hsv, lower_red, upper_red)
 
     #operations on the blue object
     blueopen=cv2.morphologyEx(blue, cv2.MORPH_OPEN, Open)
@@ -38,11 +45,18 @@ while(True):
     greenopen=cv2.morphologyEx(green, cv2.MORPH_OPEN, Open)
     greenclose = cv2.morphologyEx(greenopen, cv2.MORPH_CLOSE, Close)
 
+    #opperations on the red object
+    redopen = cv2.morphologyEx(red, cv2.MORPH_OPEN, Open)
+    redclose = cv2.morphologyEx(redopen, cv2.MORPH_CLOSE, Close)
+
     #number of blues available
     _, bluecnts, h = cv2.findContours(blueclose.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)# if you get too many values to unpack just add _, at the begining
 
     #number of greens available
     _, greencnts, h = cv2.findContours(greenclose.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+
+    #number of reds available
+    _, redcnts, h =cv2.findContours(redclose.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
     font=cv2.FONT_HERSHEY_SIMPLEX
     trial=cv2.LINE_AA
@@ -75,17 +89,23 @@ while(True):
         #output for the situation
         cv2.putText(frame, 'B', (0, 50), font, 2, (0, 255, 0), 3, trial)
 
-    elif (len(greencnts)==1 & len(bluecnts)==1):
+    elif (len(greencnts)==4):
         x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
-        x2, y2, w2, h2 = cv2.boundingRect(bluecnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(greencnts[1])
+        x3, y3, w3, h3 = cv2.boundingRect(greencnts[1])
+        x4, y4, w4, h4 = cv2.boundingRect(greencnts[1])
 
         #making circles
-        cv2.circle(frame, (x1, y1), 20, (0, 0, 255), 1)
+        cv2.circle(frame, (x1, y1), 20, (0, 255, 0), 1)
         cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
 
         #result
-        cv2.putText(frame, 'green', (0, 50), font, 2, (0, 0, 255), 3, trial)
+        cv2.putText(frame, 'A', (0, 50), font, 2, (0, 0, 255), 3, trial)
 
+    elif (len(redcnts)==1):
+        cv2.putText(frame, 'red', (0,50), font, 2, (255, 0, 0), 3, trial)
 
     # displaying the frame captured
     cv2.imshow('frame', frame)
