@@ -21,7 +21,7 @@ while(True):
     upper_blue = np.array([130, 255, 255])
 
     #green
-    lower_green = np.array([33,80,40])
+    lower_green = np.array([33,100,40])
     upper_green = np.array([100,255,255])
 
     #red
@@ -101,8 +101,10 @@ while(True):
         cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
         cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
 
+        cv2.line(frame, (x1, y1), (x2,y2), (255,0,0),1)
+
         #result
-        cv2.putText(frame, 'A', (0, 50), font, 2, (0, 0, 255), 3, trial)
+        cv2.putText(frame, 'A', (0, 50), font, 2, (0, 255, 0), 3, trial)
 
     elif (len(redcnts)==1):
         cv2.putText(frame, 'red', (0,50), font, 2, (255, 0, 0), 3, trial)
