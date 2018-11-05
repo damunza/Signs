@@ -150,7 +150,7 @@ while(True):
         cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
         cv2.circle(frame, (x5, y5), 20, (0, 255, 0), 1)
 
-        cv2.line(frame, (x1,x5), (y1,y5), )
+        cv2.line(frame, (x1,y1), (x5,y5), (255, 0, 0), 2)
 
     # displaying the frame captured
     cv2.imshow('frame', frame)
