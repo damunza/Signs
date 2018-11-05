@@ -25,8 +25,8 @@ while(True):
     upper_green = np.array([100,255,255])
 
     #red
-    lower_red = np.array([45,50,110])
-    upper_red = np.array([90,255,255])
+    lower_red = np.array([0,100,100])
+    upper_red = np.array([10,255,255])
 
     #getting only blue images
     blue = cv2.inRange(hsv, lower_blue, upper_blue)
@@ -101,13 +101,56 @@ while(True):
         cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
         cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
 
-        cv2.line(frame, (x1, y1), (x2,y2), (255,0,0),1)
+        a = cv2.line(frame, (x1, y1), (x2,y2), (255,0,0),1)
+        b = cv2.line(frame, (x2, y2), (x3,y3), (255,0,0),1)
+        c = cv2.line(frame, (x3, y3), (x4,y4), (255,0,0),1)
 
-        #result
-        cv2.putText(frame, 'A', (0, 50), font, 2, (0, 255, 0), 3, trial)
+        if len(a)==len(b) & len(b)==len(c) :
 
-    elif (len(redcnts)==1):
+            #result
+            cv2.putText(frame, 'A', (0, 50), font, 2, (0, 255, 0), 3, trial)
+
+    elif (len(redcnts)==2):
+        x1, y1, w1, h1 = cv2.boundingRect(redcnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(redcnts[1])
+
+        cv2.circle(frame, (x1, y1), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
+
+        distance = (((x1-y1)**2) + ((x2-y2)**2))**0.5
+
         cv2.putText(frame, 'red', (0,50), font, 2, (255, 0, 0), 3, trial)
+        
+    elif (len(greencnts)==3) & (len(bluecnts)==1):
+        x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(greencnts[1])
+        x3, y3, w3, h3 = cv2.boundingRect(greencnts[2])
+        x4, y4, w4, h4 = cv2.boundingRect(bluecnts[0])
+
+        cv2.circle(frame, (x1, y1), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
+
+        distance = (((x3-y3)**2) + ((x4-y4)**2))**0.5
+
+        if distance > 327:
+            cv2.putText(frame, 'D', (0,50), font, 2, (255, 0, 0), 3,trial)
+
+    elif (len(greencnts) == 5):
+        x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(greencnts[1])
+        x3, y3, w3, h3 = cv2.boundingRect(greencnts[2])
+        x4, y4, w4, h4 = cv2.boundingRect(greencnts[3])
+        x5, y5, w5, h5 = cv2.boundingRect(greencnts[4])
+
+        cv2.circle(frame, (x1, y1), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x5, y5), 20, (0, 255, 0), 1)
+
+        cv2.line(frame, (x1,x5), (y1,y5), )
 
     # displaying the frame captured
     cv2.imshow('frame', frame)
