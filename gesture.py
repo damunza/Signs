@@ -132,6 +132,7 @@ while(True):
         cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
         cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
 
+        # finding the distance between fingers
         distance = (((x3-y3)**2) + ((x4-y4)**2))**0.5
 
         if distance > 327:
@@ -150,7 +151,12 @@ while(True):
         cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
         cv2.circle(frame, (x5, y5), 20, (0, 255, 0), 1)
 
-        cv2.line(frame, (x1,y1), (x5,y5), (255, 0, 0), 2)
+        cv2.line(frame, (x1,y1), (x5,y5), (255, 0, 0), 1)
+
+        dist = (((x1-y1)**2) + ((x5-y5)**2))**0.5
+
+        if dist > 148:
+            cv2.putText(frame, 'E', (0,50), font, 2, (255, 0, 0), 3, trial)
 
     # displaying the frame captured
     cv2.imshow('frame', frame)
