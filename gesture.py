@@ -155,8 +155,27 @@ while(True):
 
         dist = (((x1-y1)**2) + ((x5-y5)**2))**0.5
 
-        if dist > 148:
+        if dist > 148 and dist < 157:
             cv2.putText(frame, 'E', (0,50), font, 2, (255, 0, 0), 3, trial)
+
+        else:
+            cv2.putText(frame, '5', (0, 50), font, 2, (255, 0, 0), 3, trial)
+
+    elif (len(greencnts)== 2):
+        x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(greencnts[1])
+
+        cv2.circle(frame, (x1,y1), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
+
+        cv2.putText(frame, 'H', (0, 50), font, 2, (255, 0, 0), 3, trial)
+
+    elif (len(greencnts)== 1):
+        x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
+
+        cv2.circle(frame, (x1,y1), 20, (0, 255, 0), 1)
+
+        cv2.putText(frame, 'G', (0, 50), font, 2, (255, 0, 0), 3, trial)
 
     # displaying the frame captured
     cv2.imshow('frame', frame)
