@@ -135,7 +135,7 @@ while(True):
         # finding the distance between fingers
         distance = (((x3-y3)**2) + ((x4-y4)**2))**0.5
 
-        if distance > 327:
+        if distance > 327 and distance < 358:
             cv2.putText(frame, 'D', (0,50), font, 2, (255, 0, 0), 3,trial)
 
     elif (len(greencnts) == 5):
