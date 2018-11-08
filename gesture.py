@@ -86,8 +86,12 @@ while(True):
         cv2.circle(frame, (x3, y3), 20, (0, 0, 255), 1)
         cv2.circle(frame, (x4, y4), 20, (0, 0, 255), 1)
 
+        distance = (((x1 - y1) ** 2) + ((x4 - y4) ** 2)) ** 0.5
+
         #output for the situation
-        cv2.putText(frame, 'B', (0, 50), font, 2, (0, 255, 0), 3, trial)
+        if distance < 350:
+            cv2.putText(frame, 'B', (0, 50), font, 2, (0, 255, 0), 3, trial)
+            # print(distance)
 
     elif (len(greencnts)==4):
         x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
@@ -110,7 +114,7 @@ while(True):
             #result
             cv2.putText(frame, 'A', (0, 50), font, 2, (0, 255, 0), 3, trial)
 
-    elif (len(redcnts)==2):
+    elif (len(redcnts)==2) and (len(bluecnts)==1):
         x1, y1, w1, h1 = cv2.boundingRect(redcnts[0])
         x2, y2, w2, h2 = cv2.boundingRect(redcnts[1])
 
@@ -119,7 +123,7 @@ while(True):
 
         distance = (((x1-y1)**2) + ((x2-y2)**2))**0.5
 
-        cv2.putText(frame, 'red', (0,50), font, 2, (255, 0, 0), 3, trial)
+        cv2.putText(frame, 'C', (0,50), font, 2, (255, 0, 0), 3, trial)
         
     elif (len(greencnts)==3) & (len(bluecnts)==1):
         x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
@@ -137,6 +141,10 @@ while(True):
 
         if distance > 210 and distance < 230:
             cv2.putText(frame, 'D', (0,50), font, 2, (255, 0, 0), 3,trial)
+
+        else:
+            cv2.putText(frame, 'I', (0, 50), font, 2, (255, 0, 0), 3, trial)
+            # print(distance)
 
     elif (len(greencnts) == 5):
         x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
@@ -158,9 +166,6 @@ while(True):
         if dist > 148 and dist < 157:
             cv2.putText(frame, 'E', (0,50), font, 2, (255, 0, 0), 3, trial)
 
-        # else:
-        #     cv2.putText(frame, '5', (0, 50), font, 2, (255, 0, 0), 3, trial)
-
     elif (len(greencnts)== 2):
         x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
         x2, y2, w2, h2 = cv2.boundingRect(greencnts[1])
@@ -176,26 +181,6 @@ while(True):
         cv2.circle(frame, (x1,y1), 20, (0, 255, 0), 1)
 
         cv2.putText(frame, 'G', (0, 50), font, 2, (255, 0, 0), 3, trial)
-
-    elif (len(greencnts)==3) & (len(bluecnts)==1):
-        x1, y1, w1, h1 = cv2.boundingRect(bluecnts[0])
-        x2, y2, w2, h2 = cv2.boundingRect(greencnts[0])
-        x3, y3, w3, h3 = cv2.boundingRect(greencnts[1])
-        x4, y4, w4, h4 = cv2.boundingRect(greencnts[2])
-
-
-        cv2.circle(frame, (x1, y1), 20, (0, 255, 0), 1)
-        cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
-        cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
-        cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
-
-        # finding the distance between fingers
-        distance = (((x1-y1)**2) + ((x2-y2)**2))**0.5
-        print(distance)
-        print('hi')
-
-        # if distance > 210 and distance < 230:
-        #     cv2.putText(frame, 'D', (0,50), font, 2, (255, 0, 0), 3,trial)
 
 
     # displaying the frame captured
