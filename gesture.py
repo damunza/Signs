@@ -182,6 +182,222 @@ while(True):
 
         cv2.putText(frame, 'G', (0, 50), font, 2, (255, 0, 0), 3, trial)
 
+    elif (len(greencnts) == 3):
+        x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(greencnts[1])
+        x3, y3, w3, h3 = cv2.boundingRect(greencnts[2])
+
+        cv2.circle(frame, (x1, y1), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
+
+        a = cv2.line(frame, (x1,y1), (x2,y2), (255, 0, 0), 1)
+        b = cv2.line(frame, (x2,y2), (x3,y3), (255, 0, 0), 1)
+
+        # dist_a = (((x1-y1)**2) + ((x2-y2)**2))**0.5
+        # dist_b = (((x2-y2)**2) + ((x3-y3)**2))**0.5
+
+        cv2.putText(frame, 'S', (0, 50), font, 2, (255, 0, 0), 3, trial)
+
+    elif (len(greencnts) == 4):
+        x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(greencnts[1])
+        x3, y3, w3, h3 = cv2.boundingRect(greencnts[2])
+        x4, y4, w4, h4 = cv2.boundingRect(greencnts[3])
+
+        cv2.circle(frame, (x1, y1), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
+
+        a = cv2.line(frame, (x1,y1), (x2,y2), (255, 0, 0), 1)
+        b = cv2.line(frame, (x2,y2), (x3,y3), (255, 0, 0), 1)
+        c = cv2.line(frame, (x3,y3), (x4,y4), (255, 0, 0), 1)
+
+        # dist = (((x1-y1)**2) + ((x2-y2)**2))**0.5
+        # dist = (((x2-y2)**2) + ((x3-y3)**2))**0.5
+        # dist = (((x3-y3)**2) + ((x4-y4)**2))**0.5
+
+    #     if len(a)
+        cv2.putText(frame, 'T', (0, 50), font, 2, (255, 0, 0), 3, trial)
+
+    elif len(greencnts) == 3 and len(bluecnts) == 2:
+        x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(greencnts[1])
+        x3, y3, w3, h3 = cv2.boundingRect(bluecnts[0])
+        x4, y4, w4, h4 = cv2.boundingRect(bluecnts[1])
+        x5, y5, w5, h5 = cv2.boundingRect(greencnts[2])
+
+        cv2.circle(frame, (x1, y1), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x5, y5), 20, (0, 255, 0), 1)
+
+        a = cv2.line(frame, (x1,y1), (x2,y2), (255, 0, 0), 1)
+        b = cv2.line(frame, (x2,y2), (x3,y3), (255, 0, 0), 1)
+        c = cv2.line(frame, (x3,y3), (x4,y4), (255, 0, 0), 1)
+        d = cv2.line(frame, (x4,y4), (x5,y5), (255, 0, 0), 1)
+
+        dist_a = (((x1-y1)**2) + ((x2-y2)**2))**0.5
+        dist_b = (((x2-y2)**2) + ((x3-y3)**2))**0.5
+        dist_c = (((x3-y3)**2) + ((x4-y4)**2))**0.5
+        dist_d = (((x4-y4)**2) + ((x5-y5)**2))**0.5
+
+        if dist_a == dist_c:
+          cv2.putText(frame, 'U', (0, 50), font, 2, (255, 0, 0), 3, trial)
+        else:
+          cv2.putText(frame, 'V or 2', (0, 50), font, 2, (255, 0, 0), 3, trial)
+
+    elif (len(greencnts) == 1) and (len(bluecnts) == 3):
+        x1, y1, w1, h1 = cv2.boundingRect(bluecnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(bluecnts[1])
+        x3, y3, w3, h3 = cv2.boundingRect(bluecnts[2])
+        x4, y4, w4, h4 = cv2.boundingRect(greencnts[0])
+
+        cv2.circle(frame, (x1, y1), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
+
+        a = cv2.line(frame, (x1,y1), (x2,y2), (255, 0, 0), 1)
+        b = cv2.line(frame, (x2,y2), (x3,y3), (255, 0, 0), 1)
+        c = cv2.line(frame, (x3,y3), (x4,y4), (255, 0, 0), 1)
+
+        dist_a = (((x1-y1)**2) + ((x2-y2)**2))**0.5
+        dist_b = (((x2-y2)**2) + ((x3-y3)**2))**0.5
+        dist_c = (((x3-y3)**2) + ((x4-y4)**2))**0.5
+
+        if dist_a == dist_b:
+            cv2.putText(frame, 'W or 6', (0, 50), font, 2, (255, 0, 0), 3, trial)
+        elif dist_a > dist_b:
+            cv2.putText(frame, '7', (0, 50), font, 2, (255, 0, 0), 3, trial)
+        elif dist_a < dist_b:
+            cv2.putText(frame, '8', (0, 50), font, 2, (255, 0, 0), 3, trial)
+
+    elif (len(greencnts) == 4):
+        x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(greencnts[1])
+        x3, y3, w3, h3 = cv2.boundingRect(greencnts[2])
+        x4, y4, w4, h4 = cv2.boundingRect(greencnts[3])
+
+        cv2.circle(frame, (x1, y1), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
+
+        a = cv2.line(frame, (x1,y1), (x2,y2), (255, 0, 0), 1)
+        b = cv2.line(frame, (x2,y2), (x3,y3), (255, 0, 0), 1)
+        c = cv2.line(frame, (x3,y3), (x4,y4), (255, 0, 0), 1)
+
+        dist_a = (((x1-y1)**2) + ((x2-y2)**2))**0.5
+        dist_b = (((x2-y2)**2) + ((x3-y3)**2))**0.5
+        dist_c = (((x3-y3)**2) + ((x4-y4)**2))**0.5
+
+        cv2.putText(frame, 'X', (0, 50), font, 2, (255, 0, 0), 3, trial)
+
+    elif (len(greencnts) == 3) and len(bluecnts) == 2:
+        x1, y1, w1, h1 = cv2.boundingRect(bluecnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(greencnts[0])
+        x3, y3, w3, h3 = cv2.boundingRect(greencnts[1])
+        x4, y4, w4, h4 = cv2.boundingRect(greencnts[2])
+        x5, y5, w5, h5 = cv2.boundingRect(greencnts[3])
+
+        cv2.circle(frame, (x1, y1), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x5, y5), 20, (0, 255, 0), 1)
+
+        a = cv2.line(frame, (x1,y1), (x2,y2), (255, 0, 0), 1)
+        b = cv2.line(frame, (x2,y2), (x3,y3), (255, 0, 0), 1)
+        c = cv2.line(frame, (x3,y3), (x4,y4), (255, 0, 0), 1)
+        d = cv2.line(frame, (x4,y4), (x5,y5), (255, 0, 0), 1)
+
+        dist = (((x1-y1)**2) + ((x2-y2)**2))**0.5
+        dist = (((x2-y2)**2) + ((x3-y3)**2))**0.5
+        dist = (((x3-y3)**2) + ((x4-y4)**2))**0.5
+        dist = (((x4-y4)**2) + ((x5-y5)**2))**0.5
+
+    #     if len(b) == len(c)
+        cv2.putText(frame, 'Y', (0, 50), font, 2, (255, 0, 0), 3, trial)
+
+    elif len(greencnts) == 2 and len(bluecnts) == 3:
+        x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(greencnts[1])
+        x3, y3, w3, h3 = cv2.boundingRect(bluecnts[0])
+        x4, y4, w4, h4 = cv2.boundingRect(bluecnts[1])
+        x5, y5, w5, h5 = cv2.boundingRect(bluecnts[2])
+
+        cv2.circle(frame, (x1, y1), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x5, y5), 20, (0, 255, 0), 1)
+
+        a = cv2.line(frame, (x1,y1), (x2,y2), (255, 0, 0), 1)
+        b = cv2.line(frame, (x2,y2), (x3,y3), (255, 0, 0), 1)
+        c = cv2.line(frame, (x3,y3), (x4,y4), (255, 0, 0), 1)
+        d = cv2.line(frame, (x4,y4), (x5,y5), (255, 0, 0), 1)
+
+        dist_a = (((x1-y1)**2) + ((x2-y2)**2))**0.5
+        dist_b = (((x2-y2)**2) + ((x3-y3)**2))**0.5
+        dist_c = (((x3-y3)**2) + ((x4-y4)**2))**0.5
+        dist_d = (((x4-y4)**2) + ((x5-y5)**2))**0.5
+
+        cv2.putText(frame, '3', (0, 50), font, 2, (255, 0, 0), 3, trial)
+
+    elif len(greencnts) == 1 and len(bluecnts) == 4:
+        x1, y1, w1, h1 = cv2.boundingRect(greencnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(bluecnts[0])
+        x3, y3, w3, h3 = cv2.boundingRect(bluecnts[1])
+        x4, y4, w4, h4 = cv2.boundingRect(bluecnts[2])
+        x5, y5, w5, h5 = cv2.boundingRect(bluecnts[3])
+
+        cv2.circle(frame, (x1, y1), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x5, y5), 20, (0, 255, 0), 1)
+
+        a = cv2.line(frame, (x1,y1), (x2,y2), (255, 0, 0), 1)
+        b = cv2.line(frame, (x2,y2), (x3,y3), (255, 0, 0), 1)
+        c = cv2.line(frame, (x3,y3), (x4,y4), (255, 0, 0), 1)
+        d = cv2.line(frame, (x4,y4), (x5,y5), (255, 0, 0), 1)
+
+        dist_a = (((x1-y1)**2) + ((x2-y2)**2))**0.5
+        dist_b = (((x2-y2)**2) + ((x3-y3)**2))**0.5
+        dist_c = (((x3-y3)**2) + ((x4-y4)**2))**0.5
+        dist_d = (((x4-y4)**2) + ((x5-y5)**2))**0.5
+
+        cv2.putText(frame, '4', (0, 50), font, 2, (255, 0, 0), 3, trial)
+
+    elif len(bluecnts) == 5:
+        x1, y1, w1, h1 = cv2.boundingRect(bluecnts[0])
+        x2, y2, w2, h2 = cv2.boundingRect(bluecnts[1])
+        x3, y3, w3, h3 = cv2.boundingRect(bluecnts[2])
+        x4, y4, w4, h4 = cv2.boundingRect(bluecnts[3])
+        x5, y5, w5, h5 = cv2.boundingRect(bluecnts[4])
+
+        cv2.circle(frame, (x1, y1), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x2, y2), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x3, y3), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x4, y4), 20, (0, 255, 0), 1)
+        cv2.circle(frame, (x5, y5), 20, (0, 255, 0), 1)
+
+        a = cv2.line(frame, (x1,y1), (x2,y2), (255, 0, 0), 1)
+        b = cv2.line(frame, (x2,y2), (x3,y3), (255, 0, 0), 1)
+        c = cv2.line(frame, (x3,y3), (x4,y4), (255, 0, 0), 1)
+        d = cv2.line(frame, (x4,y4), (x5,y5), (255, 0, 0), 1)
+
+        dist_a = (((x1-y1)**2) + ((x2-y2)**2))**0.5
+        dist_b = (((x2-y2)**2) + ((x3-y3)**2))**0.5
+        dist_c = (((x3-y3)**2) + ((x4-y4)**2))**0.5
+        dist_d = (((x4-y4)**2) + ((x5-y5)**2))**0.5
+
+        cv2.putText(frame, '5', (0, 50), font, 2, (255, 0, 0), 3, trial)
+
+
 
     # displaying the frame captured
     cv2.imshow('frame', frame)
